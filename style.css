@@ -1,7 +1,8 @@
 :root {
-    --primary-color: #ff3366;
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --text-color: #ffffff;
+    --sunset-deep: #2c3e50;
+    --sunset-mid: #e67e22;
+    --sunset-light: #f1c40f;
+    --glass: rgba(0, 0, 0, 0.3);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,116 +12,102 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000;
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
+    background: #000;
 }
 
-/* Imagem de Fundo com Movimento Lento */
-.background-image {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('universo.jpg') no-repeat center center;
-    background-size: cover;
-    z-index: -3;
-    filter: brightness(0.5);
-    animation: backgroundSlowMove 30s linear infinite alternate;
-}
-
-@keyframes backgroundSlowMove {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
-}
-
-/* Brilho da Nebulosa */
-.nebula-glow {
+/* Fundo Dinâmico de Entardecer */
+.sunset-bg {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(100, 0, 255, 0.15), transparent),
-                radial-gradient(circle at 80% 70%, rgba(255, 0, 100, 0.1), transparent);
-    z-index: -2;
-    animation: aurora 10s ease infinite alternate;
-}
-
-@keyframes aurora {
-    from { opacity: 0.4; }
-    to { opacity: 0.8; }
-}
-
-/* Estrelas do Particles.js */
-#particles-js {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(180deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background-size: 400% 400%;
     z-index: -1;
+    animation: sunsetAnimation 10s ease infinite alternate;
 }
 
-/* Card Central (Vidro) */
-.main-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 40px;
-    padding: 60px 40px;
+@keyframes sunsetAnimation {
+    0% { background-position: 50% 0%; }
+    100% { background-position: 50% 100%; }
+}
+
+/* Container do Álbum */
+.book-container {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 30px;
     text-align: center;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.6);
-    z-index: 10;
-    max-width: 90%;
-    width: 450px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    width: 380px;
 }
 
-/* Coração Pulsante */
-.heart-container { position: relative; margin-bottom: 80px; }
-
-.heart {
-    background-color: var(--primary-color);
-    width: 60px; height: 60px;
-    position: relative; margin: 0 auto;
-    transform: rotate(-45deg);
-    animation: heartBeat 1.4s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
-    box-shadow: 0 0 40px var(--primary-color);
-}
-.heart::before, .heart::after {
-    content: ""; background-color: var(--primary-color);
-    border-radius: 50%; width: 60px; height: 60px; position: absolute;
-}
-.heart::before { top: -30px; left: 0; }
-.heart::after { left: 30px; top: 0; }
-
-.heart-glow {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 120px; height: 120px; background: var(--primary-color);
-    filter: blur(50px); border-radius: 50%; opacity: 0.4;
-    animation: glowPulse 1.4s infinite;
+/* Moldura da Foto */
+.photo-frame {
+    background: white;
+    padding: 10px 10px 40px 10px; /* Estilo Polaroid */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    transform: rotate(-3deg);
+    margin-bottom: 25px;
 }
 
-@keyframes heartBeat {
-    0%, 100% { transform: rotate(-45deg) scale(1); }
-    50% { transform: rotate(-45deg) scale(1.15); }
+.couple-photo {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
-@keyframes glowPulse {
-    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
-}
-
-/* Textos */
-h1 {
+.title {
     font-family: 'Dancing Script', cursive;
-    font-size: 3rem; color: var(--text-color);
-    text-shadow: 0 0 15px rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Estilo do Contador */
+#timer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    color: white;
+}
+
+.time-unit span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+.time-unit p {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .divider {
-    width: 60px; height: 2px; background: var(--primary-color);
-    margin: 25px auto; border-radius: 10px;
-    box-shadow: 0 0 10px var(--primary-color);
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.5);
+    margin: 20px auto;
 }
 
-p {
-    font-size: 1.1rem; line-height: 1.6; font-weight: 300;
-    color: rgba(255,255,255,0.85);
+.poem {
+    color: #f0f0f0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Animação de Entrada */
+.fade-in {
+    animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
